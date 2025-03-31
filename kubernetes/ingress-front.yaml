@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   creationTimestamp: null
-  name: demo
+  name: front
 spec:
   rules:
   - host: localhost
@@ -10,17 +10,10 @@ spec:
       paths:
       - backend:
           service:
-            name: demo
+            name: front
             port:
               number: 80
-        path: /api/hello
-        pathType: Exact
-      - backend:
-          service:
-            name: demo
-            port:
-              number: 80
-        path: /api/chao
-        pathType: Exact
+        path: /
+        pathType: Prefix
 status:
   loadBalancer: {}

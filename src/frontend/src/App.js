@@ -1,23 +1,27 @@
-import logo from './logo.svg';
 import './App.css';
+import { useEffect, useState } from 'react';
 
 function App() {
+const [data1, setData1] = useState(null);
+const [data2, setData2] = useState(null);
+
+useEffect(() => {
+fetch("http://localhost:9090/api/hello").then((response) => response.json())
+.then((data1) => setData1(data1))
+.catch((error) => console.error("Error fetching data:", error));
+}, []);
+useEffect(() => {
+fetch("http://localhost:9090/api/chao").then((response) => response.json())
+.then((data2) => setData2(data2))
+.catch((error) => console.error("Error fetching data:", error));
+}, []);
+
+
   return (
     <div className="App">
-          <header className="App-header">
-            <img src="https://images.app.goo.gl/agZTPeu7Qu5DWJCN9" className="App-logo" alt="logo" />
-            <p>
-              Edit <code>src/App.js</code> and save to reload.
-            </p>
-        <a
-          className="demo App"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+           <h1>API Response</h1>
+           <pre>{data1 ? JSON.stringify(data1, null, 2) : "Loading..."}</pre>
+           <pre>{data2 ? JSON.stringify(data2, null, 2) : "Loading..."}</pre>
     </div>
   );
 }

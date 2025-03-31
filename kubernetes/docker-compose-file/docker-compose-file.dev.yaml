@@ -1,0 +1,32 @@
+version: "3.8"
+services:
+  react-app:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    container_name: react-app_dev
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV=development
+      CHOKIDAR_USEPOLLING=true
+    networks:
+      react_network:
+    depends_on: backend
+
+  backend:
+    image:
+      node:18
+    container_name: backend_dev
+    working_dir: /app
+    volumes:
+      - ./backend:/app
+    command:
+      - "npm run dev"
+    ports:
+      - "80:80"
+    networks:
+      react_network:

@@ -34,3 +34,10 @@ build/
 /src/main/resources/static/node_modules
 npm-*.log
 generated/
+
+.env
+.dockerignore
+node_modules
+npm-debug.log
+.git
+.gitignore

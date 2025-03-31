@@ -3,22 +3,22 @@ kind: Deployment
 metadata:
   creationTimestamp: null
   labels:
-    app: demo
-  name: demo
+    app: front
+  name: front
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: demo
+      app: front
   strategy: {}
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: demo
+        app: front
     spec:
       containers:
-      - image: demo:0.0.1-SNAPSHOT
-        name: demo
+      - image: front:0.0.1-SNAPSHOT
+        name: front
         resources: {}
 status: {}
