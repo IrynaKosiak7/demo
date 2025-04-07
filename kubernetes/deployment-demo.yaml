@@ -18,7 +18,7 @@ spec:
         app: demo
     spec:
       containers:
-      - image: demo:0.0.1-SNAPSHOT
+      - image: demo:1.0.0-SNAPSHOT
         name: demo
         resources: {}
 status: {}

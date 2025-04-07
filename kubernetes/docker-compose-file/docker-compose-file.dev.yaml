@@ -28,5 +28,6 @@ services:
       - "npm run dev"
     ports:
       - "80:80"
+
     networks:
       react_network:

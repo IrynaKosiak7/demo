@@ -13,14 +13,7 @@ spec:
             name: demo
             port:
               number: 80
-        path: /api/hello
-        pathType: Exact
-      - backend:
-          service:
-            name: demo
-            port:
-              number: 80
-        path: /api/chao
+        path: /
         pathType: Exact
 status:
   loadBalancer: {}
