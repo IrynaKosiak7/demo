@@ -9,7 +9,8 @@ services:
       - start-dev
       - --import-realm
     volumes:
-      - ./imports:/opt/keycloak/data/import/
+      - /home/iryna-kosiakovska/keycloak-import-data:/opt/keycloak/data/import
+      - /home/iryna-kosiakovska/keycloak/data/h2:/opt/keycloak/data/h2
     environment:
       KEYCLOAK_ADMIN: admin
       KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}

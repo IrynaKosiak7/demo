@@ -2,12 +2,22 @@
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import { AuthProvider } from "react-oidc-context";
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+const oidcConfig = {
+  authority: "http://localhost:8080/realms/Spring-boot-realm",
+  client_id: "react-app",
+  redirect_uri: "http://localhost:3000",
+  post_logout_redirect_uri: "http://localhost:3000",
+};
 root.render(
   <React.StrictMode>
-    <App />
+  <AuthProvider {...oidcConfig}>
+      <App />
+    </AuthProvider>,
   </React.StrictMode>
 );
 
