@@ -18,17 +18,15 @@ import org.springframework.web.bind.annotation.RestController;
 public class MainController {
 
     @GetMapping("/hello")
-    @CrossOrigin(origins = "http://localhost:3000/")
+    @CrossOrigin(origins = "http://localhost:3000")
     public Greeting sayHello() {
-        OAuth2User user = ((OAuth2User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         return new Greeting("Hello!");
     }
 
     @GetMapping("/chao")
-    @CrossOrigin(origins = "http://localhost:3000/")
-    @PreAuthorize("hasRole('ROLE_EDIT')")
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PreAuthorize("hasRole('ROLE_edit')")
     public Greeting sayChao() {
-        OAuth2User user = ((OAuth2User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         return new Greeting("Chao! Come back!");
     }
 

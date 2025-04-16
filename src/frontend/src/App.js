@@ -58,8 +58,8 @@ function App() {
         return (
         <div className="App">
             <h1>API Response</h1>
-            <pre>{data1 ? JSON.stringify(data1, null, 2) : "Loading..."}</pre>
-            <pre>{data2 ? JSON.stringify(data2, null, 2) : "Loading..."}</pre>
+            <pre>{data1 ? JSON.stringify(data1, null, 2) : "Oops... caused " }</pre>
+            <pre>{data2 ? JSON.stringify(data2, null, 2) : "Oops...  caused" }</pre>
             <button onClick={() => void auth.signoutRedirect()}>Log out</button>
         </div>
         );
