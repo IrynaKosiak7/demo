@@ -1,25 +1,58 @@
 version: "3.8"
 services:
+  keycloak-setup:
+    image: quay.io/keycloak/keycloak:latest
+    user: "root"
+    entrypoint: "/bin/sh -c 'chown -R keycloak:keycloak /opt/keycloak/data/h2'"
+    volumes:
+      - keycloak-data:/opt/keycloak/data/h2
   keycloak:
+    depends_on:
+      - keycloak-setup
     container_name: keycloak-bsh
     image: quay.io/keycloak/keycloak:latest
     ports:
       - "8081:8080"
     command:
       - start-dev
-      - --import-realm
+      #- --import-realm
     volumes:
-      - /home/iryna-kosiakovska/keycloak-import-data:/opt/keycloak/data/import
-      - /home/iryna-kosiakovska/keycloak/data/h2:/opt/keycloak/data/h2
+      #- /home/iryna-kosiakovska/keycloak-import-data:/opt/keycloak/data/import
+      - keycloak-data:/opt/keycloak/data/h2
+    networks:
+      - keycloak-network
     environment:
-      KEYCLOAK_ADMIN: admin
-      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
       KC_HTTP_PORT: 8080
       KC_HOSTNAME_URL: http://localhost:8081
-      KC_HOSTNAME_ADMIN_URL: http://localhost:8081
-      KC_HOSTNAME_STRICT_BACKCHANNEL: null
-      KC_HTTP_RELATIVE_PATH: /
-      KC_HTTP_ENABLED: null
-      KC_HEALTH_ENABLED: null
-      KC_METRICS_ENABLED: null
-
+#      KC_HOSTNAME_ADMIN_URL: http://localhost:8080
+#      KC_HOSTNAME_STRICT_BACKCHANNEL: null
+#      KC_HTTP_RELATIVE_PATH: /
+#      KC_HTTP_ENABLED: null
+#      KC_HEALTH_ENABLED: null
+#      KC_METRICS_ENABLED: null
+#      KC_FEATURES: |-
+#        authorization
+#        token-exchange
+#        docker
+#        impersonation
+#        scripts
+#        upload-scripts
+#        web-authn
+#        client-policies
+#        dynamic-scopes
+      #entrypoint: /opt/keycloak/bin/kc.sh start --auto-build
+  springboot-app:
+    image: demo:0.0.1-SNAPSHOT
+    environment:
+      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI: http://localhost:8080/realms/Spring-boot-realm
+    depends_on:
+    - keycloak
+    networks:
+    - keycloak-network
+networks:
+  keycloak-network:
+    driver: bridge
+volumes:
+  keycloak-data:

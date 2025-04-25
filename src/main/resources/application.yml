@@ -1,16 +1,10 @@
 spring:
   security:
     oauth2:
-      client:
-        registration:
-          keycloak:
-            client-id: spring-boot-rest
-            client-secret: KQYpXY3c7cauPwqZ5EFGQzzMyd4ZlJwe
-            scope: openid,offline_access,profile
-        provider:
-          keycloak:
-            issuer-uri: http://localhost:8080/realms/Spring-boot-realm
-            jwk-set-uri: ${spring.security.oauth2.client.registration.keycloak.issuer-uri}/protocol/openid-connect/certs
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/Spring-boot-realm
+          jwk-set-uri: ${spring.security.oauth2.resourceserver.jwt.issuer-uri}/protocol/openid-connect/certs
 
 server:
   port: 8081

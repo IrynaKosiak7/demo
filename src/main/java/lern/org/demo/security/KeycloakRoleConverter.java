@@ -23,19 +23,4 @@ public class KeycloakRoleConverter implements Converter<Jwt, Collection<GrantedA
                 .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
                 .collect(Collectors.toList());
     }
-
-//    private Collection<? extends GrantedAuthority> extractRoles(final Jwt jwt) {
-//        return Optional.ofNullable(
-//                        jwt.getClaimAsMap("resource_access")
-//                )
-//                .map(resourceAccess -> resourceAccess.get("client-id"))
-//                .map(Map.class::cast)
-//                .map(client -> client.get("roles"))
-//                .map(Collection.class::cast)
-//                .map(roles -> ((Collection<String>) roles).stream()
-//                        .map(role -> new SimpleGrantedAuthority("ROLE_" + role))
-//                        .collect(Collectors.toSet())
-//                ).orElse(Collections.emptySet());
-//
-//    }
 }

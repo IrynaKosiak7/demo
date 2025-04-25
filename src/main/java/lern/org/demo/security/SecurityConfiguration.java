@@ -29,7 +29,7 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    public SecurityFilterChain configure(final HttpSecurity http) throws Exception {
+    public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http.cors(Customizer.withDefaults())
                 .cors(cors-> cors.configurationSource(corsConfigurationSource()))
                 .authorizeHttpRequests(authorize -> authorize.anyRequest().authenticated())

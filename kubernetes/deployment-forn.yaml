@@ -18,7 +18,7 @@ spec:
         app: front
     spec:
       containers:
-      - image: front:1.0.0-SNAPSHOT
+      - image: front:0.0.1-SNAPSHOT
         name: front
         resources: {}
 status: {}
